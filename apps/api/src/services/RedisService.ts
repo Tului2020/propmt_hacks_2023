@@ -29,12 +29,13 @@ export default class RedisService {
     return await this.get(this.userKey(key));
   }
 
-  public async addToChatHistory(key = 'kevin', newMessage: History): Promise<History[]> {
-    const cachedHistory = JSON.parse(await this.get(this.userKey(key)) || '[]') as History[];
-    cachedHistory.push(newMessage);
+  public async addToChatHistory(role = 'kevin', newMessage: string): Promise<History[]> {
+    const cachedHistory = JSON.parse(await this.get(this.userKey(role)) || '[]') as History[];
+    const historyItem = { role, content: newMessage };
+    cachedHistory.push(historyItem);
     cachedHistory.filter(({ role }) => role !== 'system');
-    await this.set(key, JSON.stringify(cachedHistory));
-    
+    await this.set(role, JSON.stringify(cachedHistory));
+
     cachedHistory.unshift(systemMessage);
     return cachedHistory;
   }
