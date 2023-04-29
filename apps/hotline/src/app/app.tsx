@@ -1,16 +1,20 @@
-import styled from "@emotion/styled";
+import { useState } from 'react';
+import { getLocallyAuthed } from './helpers/variables';
+import Login from './views/Login';
 
-import NxWelcome from "./nx-welcome";
+const App = () => {
+  const [username, setUsername] = useState(getLocallyAuthed() || '');
 
-const StyledApp = styled.div`
-  // Your style here
-`;
-
-export function App() {
   return (
-    <StyledApp>
-      <NxWelcome title="hotline" />
-    </StyledApp>
+    <>
+      <div>
+        Helooo
+      </div>
+      <Login
+        username={username}
+        setUsername={setUsername}
+      />
+    </>
   );
 }
 
