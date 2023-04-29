@@ -1,0 +1,107 @@
+{
+  "root": true,
+  "ignorePatterns": ["**/*"],
+  "plugins": ["@nx"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off",
+        "max-len": ["error", 200],
+        "quotes": ["error", "single"],
+        "react-hooks/exhaustive-deps": "off",
+        "no-extra-semi": "error",
+        "semi": "error",
+        "spaced-comment": "error",
+        "block-spacing": "error",
+        "no-multi-spaces": "error",
+        "no-mixed-spaces-and-tabs": "error",
+        "no-trailing-spaces": "error",
+        "no-whitespace-before-property": "error",
+        "arrow-body-style": "error",
+        "no-confusing-arrow": "error",
+        "prefer-arrow-callback": "error",
+        "arrow-parens": "error",
+        "arrow-spacing": "error",
+        "func-style": "error",
+        "eqeqeq": "error",
+        "no-inline-comments": "error",
+        "one-var-declaration-per-line": "error",
+        "linebreak-style": "error",
+        "newline-per-chained-call": "error",
+        "no-debugger": "error",
+        "quote-props": ["error", "as-needed"],
+        "no-irregular-whitespace": "error",
+        "camelcase": "error",
+        "object-curly-spacing": ["error", "always"],
+        "@typescript-eslint/no-unused-vars": "error",
+        "@typescript-eslint/member-delimiter-style": "error",
+        "space-infix-ops": "error",
+        "comma-spacing": "error",
+        "@typescript-eslint/typedef": "error",
+        "key-spacing": [
+          "error",
+          {
+            "beforeColon": false,
+            "afterColon": true
+          }
+        ],
+        "@typescript-eslint/no-require-imports": "error",
+        "no-multiple-empty-lines": [
+          "error",
+          {
+            "max": 2,
+            "maxEOF": 1
+          }
+        ],
+        "space-before-blocks": "error",
+        "keyword-spacing": "error",
+        "object-shorthand": "error",
+        "indent": ["error", 2, { "SwitchCase" : 1 }],
+        "brace-style": ["error", "1tbs", { "allowSingleLine": false }],
+        "jsx-quotes": ["error", "prefer-single"],
+        "semi-spacing": "error",
+        "space-before-function-paren": ["error", {
+          "anonymous": "never",
+          "named": "never",
+          "asyncArrow": "always"
+        }],
+        "no-duplicate-imports": "error",
+        "no-fallthrough": "error",
+        "no-inner-declarations": "error",
+        "no-self-assign": "error",
+        "no-unexpected-multiline": "error",
+        "no-unreachable": "error",
+        "no-useless-catch": "error",
+        "prefer-const": "error",
+        "prefer-object-spread": "error",
+        "array-bracket-spacing": "error",
+        "computed-property-spacing": "error",
+        "no-tabs": ["error", { "allowIndentationTabs": true }],
+        "operator-linebreak": ["error", "after"],
+        "space-in-parens": ["error", "never"],
+        "switch-colon-spacing": ["error", {"after": true, "before": false}],
+        "template-curly-spacing": ["error", "never"]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nx/typescript"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off"
+      }
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nx/javascript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+      "env": {
+        "jest": true
+      },
+      "rules": {}
+    }
+  ]
+}
