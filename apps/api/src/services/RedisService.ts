@@ -1,7 +1,8 @@
 import { createClient } from 'redis';
 import { Service } from 'typedi';
 import env from '../env';
-import { History } from '../types/types';
+import { History } from '../helpers/types';
+import systemMessage from '../helpers/systemMessage';
 
 const redisClient = createClient(env.redis);
 redisClient.on('connect', () => console.log('Redis connection established'));
@@ -28,10 +29,14 @@ export default class RedisService {
     return await this.get(this.userKey(key));
   }
 
-  public async addToChatHistory(key = 'kevin', newMessage: History): Promise<void> {
-    const cachedHistory = JSON.parse(await this.get(this.userKey(key)) || '[]');
+  public async addToChatHistory(key = 'kevin', newMessage: History): Promise<History[]> {
+    const cachedHistory = JSON.parse(await this.get(this.userKey(key)) || '[]') as History[];
     cachedHistory.push(newMessage);
+    cachedHistory.filter(({ role }) => role !== 'system');
     await this.set(key, JSON.stringify(cachedHistory));
+    
+    cachedHistory.unshift(systemMessage);
+    return cachedHistory;
   }
 
 }
