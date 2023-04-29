@@ -29,7 +29,7 @@ services:
       - ./cache:/data
     env_file:
       - .env
-    command: redis-server --requirepass $REDIS_PASSWORD --loglevel notice 
+    command: redis-server --loglevel notice 
     ports:
       - 6379:6379
 
