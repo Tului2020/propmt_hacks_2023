@@ -17,6 +17,7 @@
     "microframework-w3tec": "^0.6.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-router-dom": "^6.11.0",
     "redis": "^4.6.6",
     "routing-controllers": "^0.10.4",
     "routing-controllers-openapi": "^4.0.0",

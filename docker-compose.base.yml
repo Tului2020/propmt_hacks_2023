@@ -10,3 +10,4 @@ services:
       - DEV_PLATFORM=DOCKER
     volumes:
       - ./apps/:/app/apps
+      - ./node_modules/:/app/node_modules
