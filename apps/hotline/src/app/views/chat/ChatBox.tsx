@@ -6,17 +6,21 @@ import { History } from '../../helpers/types';
 
 interface Props {
   className?: string;
-  addToChatHistory: (userInput: string) => void;
+  addUserInput: (content: string) => void;
+  addAssistantResponse: (content: string) => void;
   chatHistory: History[];
+  username: string;
 }
 
-const ChatBox = ({ className, chatHistory, addToChatHistory }: Props) => {
+const ChatBox = ({ className, addAssistantResponse, username }: Props) => {
   const [userInput, setUserInput] = useState('');
 
   const handleNewUserInput = () => {
-    sendMessage(userInput);
-    addToChatHistory(userInput);
     setUserInput('');
+    setTimeout(() => {
+      sendMessage(username, userInput)
+        .then((res) => addAssistantResponse(res));
+    }, 1000);
   }
 
   return (

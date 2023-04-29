@@ -1,5 +1,4 @@
 import _axios, { AxiosRequestConfig } from 'axios';
-import { getLocallyAuthed } from './helpers/variables';
 
 const POST = 'POST';
 const GET = 'GET';
@@ -19,4 +18,4 @@ const axios = async (axiosRequest: AxiosRequestConfig, retObj: RetObj = 'data') 
 };
 
 // session
-export const sendMessage = (newMessage: string): Promise<void> => axios({ url: '/session/message', method: POST, data: { newMessage, role: getLocallyAuthed() } });
+export const sendMessage = (role: string, newMessage: string): Promise<string> => axios({ url: '/session/message', method: POST, data: { newMessage, role } });

@@ -10,7 +10,9 @@ const App = () => {
   return (
     <>
       <div style={{ height: '95vh' }}>
-        <Chat />
+        <Chat
+          username={username}
+        />
       </div>
       <Login
         username={username}

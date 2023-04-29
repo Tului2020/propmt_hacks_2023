@@ -4,13 +4,13 @@ import ChatBox from './ChatBox';
 import ChatHistory from './ChatHistory';
 import { useState } from 'react';
 import { History } from '../../helpers/types';
-import { getLocallyAuthed } from '../../helpers/variables';
 
 interface Props {
   className?: string;
+  username: string;
 }
 
-const Chat = ({ className }: Props) => {
+const Chat = ({ className, username }: Props) => {
   const [chatHistory, setChatHistory] = useState<History[]>([{ role: 'assistant', content: 'Hi, how can I help you today?' }]);
 
   const addToChatHistory = (role: string, newMessage: string) => {
@@ -31,7 +31,9 @@ const Chat = ({ className }: Props) => {
       <Grid item sm={12}>
         <ChatBox
           chatHistory={chatHistory}
-          addToChatHistory={(newMessage: string) => addToChatHistory(getLocallyAuthed(), newMessage)}
+          addUserInput={(newMessage: string) => addToChatHistory(username, newMessage)}
+          addAssistantResponse={(newMessage: string) => addToChatHistory('assistant', newMessage)}
+          username={username}
         />
       </Grid>
     </Grid>
