@@ -13,9 +13,10 @@ interface Props {
 const ChatBox = ({ className, chatHistory, addToChatHistory }: Props) => {
   const [userInput, setUserInput] = useState('');
 
-  const handleNewUserInput = (newMessage: string) => {
-    sendMessage(newMessage);
-    addToChatHistory(newMessage);
+  const handleNewUserInput = () => {
+    sendMessage(userInput);
+    addToChatHistory(userInput);
+    setUserInput('');
   }
 
   return (
@@ -27,11 +28,17 @@ const ChatBox = ({ className, chatHistory, addToChatHistory }: Props) => {
           cols={40}
           onChange={(e) => setUserInput(e.target.value)}
           value={userInput}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && e.shiftKey) {
+              e.preventDefault();
+              handleNewUserInput()
+            }
+          }}
         />
       </Grid>
       <Grid item className='chat-child'>
         <Button
-          onClick={() => handleNewUserInput(userInput)}
+          onClick={handleNewUserInput}
         >
           Send
         </Button>
