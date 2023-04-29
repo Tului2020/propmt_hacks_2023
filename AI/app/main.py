@@ -15,6 +15,7 @@ from app.task_manager import TaskManager
 app = FastAPI()
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
+task = TaskManager()
 
 @app.post('/closet_ai/')
 async def closet_ai(data: ClosetInput) -> str:
@@ -25,7 +26,6 @@ async def closet_ai(data: ClosetInput) -> str:
 
 @app.post('/chat_summary/')
 async def chat_summary(data: ChatSummaryInput) -> str:
-    task = TaskManager()
     prompt = task.chat_summary(data.history)
     return openai.Completion.create(
         model=data.model,
@@ -35,7 +35,6 @@ async def chat_summary(data: ChatSummaryInput) -> str:
 
 @app.post('/risk_assessment/')
 async def risk_assessment(data: RiskAssessmentInput) -> str:
-    task = TaskManager()
     prompt = task.risk_assessment(data.history)
     return openai.Completion.create(
         model=data.model,
@@ -45,12 +44,10 @@ async def risk_assessment(data: RiskAssessmentInput) -> str:
 
 @app.post('/emotion_classification/')
 async def emotion_classification(data: UserConversationInput) -> List[List[Dict[str, Any]]]:
-    task = TaskManager()
     return task.emotion_classification(data.history)
 
 @app.post('/intervention_check/')
 async def intervention_check(data: UserInput) -> str:
-    task = TaskManager()
     prompt = task.intervention_check(data.message)
     return openai.Completion.create(
         model=data.model,
