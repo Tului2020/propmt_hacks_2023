@@ -1,0 +1,7 @@
+openai
+pydantic
+fastapi
+uvicorn
+transformers
+pandas
+torch 
