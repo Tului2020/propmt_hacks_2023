@@ -1,6 +1,15 @@
-version: "3.9"
+version: '3.9'
+
 services:
-  api:
+  ai:
+    container_name: ai
     build: .
     ports:
-      - "8888:8888"
+      - 8888:8888
+    networks:
+      - psi-ops-network
+
+networks:
+  psi-ops-network:
+    name: psi-ops-network
+    external: true

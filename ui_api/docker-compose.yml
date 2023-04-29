@@ -8,6 +8,8 @@ services:
     command: npx nx serve hotline --host=0.0.0.0
     ports:
       - 4200:4200
+    networks:
+      - psi-ops-network
 
   # Express App
   api:
@@ -20,6 +22,8 @@ services:
     command: npx nx serve api --host=0.0.0.0
     ports:
       - 3333:3333
+    networks:
+      - psi-ops-network
 
   # Redis
   redis:
@@ -29,9 +33,11 @@ services:
       - ./cache:/data
     env_file:
       - .env
-    command: redis-server --loglevel notice 
+    command: redis-server --loglevel notice
     ports:
       - 6379:6379
+    networks:
+      - psi-ops-network
 
   # database:
   #   container_name: postgres
@@ -48,3 +54,9 @@ services:
   #     interval: 1s
   #     timeout: 1s
   #     retries: 30
+  #   networks:
+  #     - psi-ops-network
+
+networks:
+  psi-ops-network:
+    name: psi-ops-network
