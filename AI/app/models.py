@@ -11,7 +11,11 @@ class ChatSummaryInput(BaseModel):
 
 class RiskAssessmentInput(BaseModel):
     model: Optional[str]='text-davinci-003'
-    history: List[Dict[str,Any]]
+    history: List[Dict[str, Any]]
+
+class UserConversationInput(BaseModel):
+    history: List[Dict[str, Any]]
 
 class UserInput(BaseModel):
-    history: List[Dict[str,Any]]
+    model: Optional[str]='text-davinci-003'
+    message: Dict[str, Any]

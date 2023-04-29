@@ -4,4 +4,4 @@ fastapi
 uvicorn
 transformers
 pandas
-torch 
+torch

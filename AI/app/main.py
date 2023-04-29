@@ -1,4 +1,4 @@
-from typing import Any, Dict
+from typing import Any, Dict, List
 from fastapi import FastAPI
 import uvicorn
 import openai
@@ -7,6 +7,7 @@ from app.models import (
     ClosetInput, 
     ChatSummaryInput, 
     RiskAssessmentInput, 
+    UserConversationInput,
     UserInput
 )
 from app.task_manager import TaskManager
@@ -43,9 +44,19 @@ async def risk_assessment(data: RiskAssessmentInput) -> str:
     )['choices'][0]['text']
 
 @app.post('/emotion_classification/')
-async def emotion_classification(data: UserInput) -> Dict[str, Any]:
+async def emotion_classification(data: UserConversationInput) -> List[List[Dict[str, Any]]]:
     task = TaskManager()
     return task.emotion_classification(data.history)
+
+@app.post('/intervention_check/')
+async def intervention_check(data: UserInput) -> str:
+    task = TaskManager()
+    prompt = task.intervention_check(data.message)
+    return openai.Completion.create(
+        model=data.model,
+        prompt=prompt,
+        max_tokens=10
+    )['choices'][0]['text'].replace('\n', '')
 
 if __name__ == "__main__":
     config = uvicorn.Config("main:app", port=8888, log_level="info", reload=True)

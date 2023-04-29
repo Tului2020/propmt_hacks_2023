@@ -17,8 +17,15 @@ and report to the crisis counselor in charge. Generate a brief report for the cr
 to support your claims. Begin your report with one of the following tokens that indicate the risk level: \
 High, Medium, Low. Refer the user by their name. \n\n"
 
+INTERVENTION = "You are a robot tasked with classifying whether the user requires immediate human intervention. \
+The main criteria for this is if the user is displaying symptoms of suicidality, \
+or is showing risks of becoming a danger to themself, or to others. \
+Review the user's input below and respond with '<|intervene|>' if intervention is necessary - otherwise, \
+respond with '<|pass|>'. Your response token should be lowercased. \n\n"
+
 class TaskConfig:
     identity=IDENTITY
     chat_summary=CHAT_SUMMARY_PROMPT
     risk_assessment=RISK_ASSESSMENT_PROMPT
+    intervention=INTERVENTION
 

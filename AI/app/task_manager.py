@@ -6,8 +6,7 @@ import pandas as pd
 emotions = pipeline(
     "text-classification", 
     model="j-hartmann/emotion-english-distilroberta-base", 
-    return_all_scores=True,
-    device='cuda'
+    return_all_scores=True
 )
 
 class TaskManager:
@@ -25,6 +24,10 @@ class TaskManager:
         prompt = CFG.risk_assessment
         for chat in history:
             prompt += chat['role'] + ': ' + chat['content'] + '\n'
+        return prompt
+    
+    def intervention_check(self, user_input):
+        prompt = CFG.intervention + user_input['role'] + ': ' + user_input['content'] + '\n'
         return prompt
     
     def emotion_classification(self, history):
