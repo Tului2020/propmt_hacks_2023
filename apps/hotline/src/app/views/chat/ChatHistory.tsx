@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import ReactTextTransition from 'react-text-transition';
 import { History } from '../../helpers/types';
+import { isBot } from '../../helpers/variables';
 
 interface Props {
   className?: string;
@@ -19,7 +20,7 @@ const ChatHistory = (props: Props) => {
             className='chat-item'
           >
             <h1
-              style={{ color: ['system', 'assistant'].includes(role) ? 'red' : 'black' }}
+              style={{ color: isBot(role) ? 'red' : 'black' }}
             >
               {content}
             </h1>

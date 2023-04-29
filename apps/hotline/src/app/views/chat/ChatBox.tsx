@@ -12,10 +12,11 @@ interface Props {
   username: string;
 }
 
-const ChatBox = ({ className, addAssistantResponse, username }: Props) => {
+const ChatBox = ({ className, addAssistantResponse, addUserInput, username }: Props) => {
   const [userInput, setUserInput] = useState('');
 
   const handleNewUserInput = () => {
+    addUserInput(userInput);
     setUserInput('');
     setTimeout(() => {
       sendMessage(username, userInput)
