@@ -1,17 +1,19 @@
 import { Body, JsonController, Post } from 'routing-controllers';
 import RedisService from '../services/RedisService';
 import { SendMessageBody } from '../helpers/validators';
+import AIService from '../services/AIService';
+import { Role } from '../helpers/types';
 
 @JsonController('/session')
 export default class SessionController {
   private redisService = new RedisService();
+  private aiService = new AIService();
 
   @Post('/message')
-  public async sendMessage(@Body() { role, newMessage }: SendMessageBody): Promise<string> {
-    const conversationHistory = await this.redisService.addToChatHistory(role, newMessage);
-    console.log(conversationHistory);
-    const responseContent = 'NOTE: ADD API CALL HERE!!!';
-    this.redisService.addToChatHistory('system', responseContent);
+  public async sendMessage(@Body() { role, newMessage, name }: SendMessageBody): Promise<string> {
+    const conversationHistory = await this.redisService.addToChatHistory(role, newMessage, name);
+    const responseContent = await this.aiService.relaySendMessage(conversationHistory);
+    this.redisService.addToChatHistory(Role.system, responseContent, name);
     return responseContent;
   }
 }

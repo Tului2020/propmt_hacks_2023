@@ -17,12 +17,12 @@ const ChatBox = ({ className, addAssistantResponse, addUserInput, username }: Pr
 
   const handleNewUserInput = () => {
     addUserInput(userInput);
-    setUserInput('');
     setTimeout(() => {
-      sendMessage(username, userInput)
+      sendMessage('user', userInput, username)
         .then((res) => addAssistantResponse(res));
     }, 1000);
-  }
+    setUserInput('');
+  };
 
   return (
     <Grid container className={className}>
@@ -36,7 +36,7 @@ const ChatBox = ({ className, addAssistantResponse, addUserInput, username }: Pr
           onKeyDown={(e) => {
             if (e.key === 'Enter' && e.shiftKey) {
               e.preventDefault();
-              handleNewUserInput()
+              handleNewUserInput();
             }
           }}
         />

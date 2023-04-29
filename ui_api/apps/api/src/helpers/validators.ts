@@ -1,10 +1,13 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsString } from 'class-validator';
+import { Role } from './types';
 
 export class SendMessageBody {
-  @IsOptional()
-  @IsString()
-  role: string;
+  @IsEnum(Role)
+  public role: Role;
 
   @IsString()
   public newMessage: string;
+
+  @IsString()
+  public name: string;
 }

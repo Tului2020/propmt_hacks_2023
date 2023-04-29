@@ -1,4 +1,7 @@
 export interface History {
-  role: 'assistant' | 'system' | string,
+  role: Role;
   content: string;
+  name: string;
 }
+
+export type Role = 'assistant' | 'system' | 'user';
