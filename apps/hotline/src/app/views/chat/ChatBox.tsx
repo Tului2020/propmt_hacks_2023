@@ -1,14 +1,22 @@
 import styled from '@emotion/styled';
 import { Button, Grid } from '@mui/material';
 import { useState } from 'react';
-import { sendMessage } from '../api_calls';
+import { sendMessage } from '../../api_calls';
+import { History } from '../../helpers/types';
 
 interface Props {
   className?: string;
+  addToChatHistory: (userInput: string) => void;
+  chatHistory: History[];
 }
 
-const Chat = ({ className }: Props) => {
+const ChatBox = ({ className, chatHistory, addToChatHistory }: Props) => {
   const [userInput, setUserInput] = useState('');
+
+  const handleNewUserInput = (newMessage: string) => {
+    sendMessage(newMessage);
+    addToChatHistory(newMessage);
+  }
 
   return (
     <Grid container className={className}>
@@ -23,7 +31,7 @@ const Chat = ({ className }: Props) => {
       </Grid>
       <Grid item className='chat-child'>
         <Button
-          onClick={() => sendMessage(userInput)}
+          onClick={() => handleNewUserInput(userInput)}
         >
           Send
         </Button>
@@ -32,7 +40,7 @@ const Chat = ({ className }: Props) => {
   );
 };
 
-export default styled(Chat)`
+export default styled(ChatBox)`
   width: 100%;
   height: 100%;
   display: flex;
@@ -44,3 +52,4 @@ export default styled(Chat)`
     padding: 5px;
   }
 `;
+
