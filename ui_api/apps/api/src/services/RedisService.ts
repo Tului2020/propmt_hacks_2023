@@ -21,19 +21,18 @@ export default class RedisService {
     await this.redisClient.set(key, value);
   }
 
-  private userKey(key: string): string {
-    return `user_${key}`;
+  private userKey(name: string): string {
+    return `${name}`;
   }
 
-  public async getChatHistory(key: string): Promise<string> {
-    return await this.get(this.userKey(key));
-  }
+  public async addToChatHistory(role: Role, name: string, newMessage: string): Promise<History[]> {
+    const key = this.userKey(name);
 
-  public async addToChatHistory(role: Role, newMessage: string, name: string): Promise<History[]> {
-    const cachedHistory = JSON.parse(await this.get(this.userKey(role)) || '[]') as History[];
+    let cachedHistory = JSON.parse(await this.get(key) || '[]') as History[];
     cachedHistory.push({ role, content: newMessage, name });
-    cachedHistory.filter(({ role }) => role !== 'system');
-    await this.set(role, JSON.stringify(cachedHistory));
+    cachedHistory = cachedHistory.filter(({ role }) => role !== 'system');
+
+    await this.set(key, JSON.stringify(cachedHistory));
 
     cachedHistory.unshift(systemMessage);
     return cachedHistory;
