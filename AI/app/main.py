@@ -1,5 +1,6 @@
 from typing import Any, Dict, List
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import openai
 import os
@@ -12,8 +13,16 @@ from app.models import (
 )
 from app.task_manager import TaskManager
 
-app = FastAPI()
 
+app = FastAPI(title='AI Server')
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 openai.api_key = os.getenv('OPENAI_API_KEY')
 task = TaskManager()
 
