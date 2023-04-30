@@ -27,7 +27,7 @@ const Dashboard = (props: Props) => {
         setEmotionClassification(_eC);
       })
       .catch(console.error);
-  });
+  }, []);
 
   return (
     <>
