@@ -18,7 +18,7 @@ const App = ({ className }: Props) => {
     <div className={className}>
       <Routes>
         <Route path='/chat' element={<Chat username={username} />} />
-        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/dashboard' element={<Dashboard name={username} />} />
         <Route path='*' element={<Navigate to='/chat' />} />
       </Routes>
       <Login

@@ -18,10 +18,8 @@ const ChatBox = ({ className, addAssistantResponse, addUserInput, username, load
 
   const handleNewUserInput = () => {
     addUserInput(userInput);
-    setTimeout(() => {
-      sendMessage('user', userInput, username)
-        .then((res) => addAssistantResponse(res));
-    }, 1000);
+    sendMessage('user', userInput, username)
+      .then((res) => addAssistantResponse(res));
     setUserInput('');
   };
 

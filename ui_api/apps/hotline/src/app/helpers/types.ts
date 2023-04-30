@@ -5,3 +5,11 @@ export interface History {
 }
 
 export type Role = 'assistant' | 'system' | 'user';
+
+export type ChatSummaryResponse = string;
+export type RiskAssessmentResponse = string;
+
+export interface EmotionClassificationResponse {
+  label: string;
+  score: number;
+}
