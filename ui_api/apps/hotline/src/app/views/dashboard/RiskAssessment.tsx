@@ -30,5 +30,6 @@ const RiskAssessment = (props: Props) => {
 };
 
 export default styled(RiskAssessment)`
-  padding: 30px;
+  padding: 20px;
+  border-radius: 30px;
 `;

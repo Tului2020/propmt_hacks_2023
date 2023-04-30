@@ -28,8 +28,9 @@ export default class AIService {
     return axios({ url: '/closet_ai', data: { messages: conversationHistory } });
   }
 
-  public async interventionCheck(message: History): Promise<void> {
-    console.log(await axios({ url: '/intervention_check', data: { message } }));
+  public async interventionCheck(message: History): Promise<boolean> {
+    const intervention = await axios({ url: '/intervention_check', data: { message } });
+    return intervention === '<|intervene|>';
   }
 
   public async getChatSummary(conversationHistory: History[]): Promise<string> {
