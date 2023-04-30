@@ -1,7 +1,5 @@
 from app.agent_config import TaskConfig as CFG
 from transformers import pipeline
-import pandas as pd
-
 
 emotions = pipeline(
     "text-classification", 
