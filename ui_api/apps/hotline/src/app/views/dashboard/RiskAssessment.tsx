@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { RiskAssessmentResponse } from '../../helpers/types';
+import { useEffect, useState } from 'react';
 
 interface Props {
   className?: string;
@@ -8,19 +9,22 @@ interface Props {
 
 const RiskAssessment = (props: Props) => {
   const { className, riskAssessment } = props;
+  const [level, setLevel] = useState<'red' | 'yellow' | 'none'>('none');
+
+  useEffect(() => {
+    if (riskAssessment.includes('<|high|>')) {
+      setLevel('red');
+    } else if (riskAssessment.includes('<|medium|>')) {
+      setLevel('yellow');
+    } else {
+      setLevel('none');
+    }
+  }, [riskAssessment]);
 
   return (
-    <div className={className}>
+    <div className={className} style={{ border: `3px solid ${level}` }}>
       <h1>Risk Assessment</h1>
-      {riskAssessment
-        .split('\n')
-        .filter((i) => !!i)
-        .map((text, idx) => (
-          <div key={idx}>
-            {text}
-          </div>
-        ))
-      }
+      {riskAssessment}
     </div>
   );
 };

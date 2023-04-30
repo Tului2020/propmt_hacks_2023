@@ -26,7 +26,7 @@ export default class SessionController {
 
     return [
       '\nSummary:\n- User, [Name] is feeling depressed and suicidal. \n- User initially states they are feeling better, but then continues to express suicidal thoughts. \n- Assistant encouraged user to seek professional help and reminded user that their life is valuable and things can get better. \n- Assistant offered user the resource of speaking to a professional counselor immediately.',
-      '\nHigh Risk: John has expressed an inclination to harm themselves by stating his desire to kill himself. During the conversation, he reiterated this feeling multiple times. It is important to take his threats seriously and take immediate steps to mitigate any potential risks.',
+      '\n<|medium|>: John has expressed an inclination to harm themselves by stating his desire to kill himself. During the conversation, he reiterated this feeling multiple times. It is important to take his threats seriously and take immediate steps to mitigate any potential risks.',
       [
         [
           {
