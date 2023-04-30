@@ -10,9 +10,10 @@ interface Props {
   addAssistantResponse: (content: string) => void;
   chatHistory: History[];
   username: string;
+  loading: boolean;
 }
 
-const ChatBox = ({ className, addAssistantResponse, addUserInput, username }: Props) => {
+const ChatBox = ({ className, addAssistantResponse, addUserInput, username, loading }: Props) => {
   const [userInput, setUserInput] = useState('');
 
   const handleNewUserInput = () => {
@@ -34,7 +35,7 @@ const ChatBox = ({ className, addAssistantResponse, addUserInput, username }: Pr
           onChange={(e) => setUserInput(e.target.value)}
           value={userInput}
           onKeyDown={(e) => {
-            if (e.key === 'Enter' && e.shiftKey) {
+            if (!loading && e.key === 'Enter' && e.shiftKey) {
               e.preventDefault();
               handleNewUserInput();
             }
@@ -44,6 +45,7 @@ const ChatBox = ({ className, addAssistantResponse, addUserInput, username }: Pr
       <Grid item className='chat-child'>
         <Button
           onClick={handleNewUserInput}
+          disabled={loading}
         >
           Send
         </Button>

@@ -44,6 +44,7 @@ const Chat = ({ className, username }: Props) => {
             addUserInput={(newMessage: string) => addToChatHistory('user', newMessage, username)}
             addAssistantResponse={(newMessage: string) => addToChatHistory('assistant', newMessage, 'assistant')}
             username={username}
+            loading={loading}
           />
         </Grid>
       </Grid>
