@@ -19,9 +19,7 @@ const ChatHistory = (props: Props) => {
             key={idx}
             className='chat-item'
           >
-            <h1
-              style={{ color: isBot(role) ? 'red' : 'black' }}
-            >
+            <h1 style={{ color: isBot(role) ? 'rgb(167, 211, 146)' : 'rgb(245, 245, 245)' }}>
               {content}
             </h1>
           </ReactTextTransition>
@@ -37,6 +35,12 @@ export default styled(ChatHistory)`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: Helvetica;
+
+  .inline {
+    width: 700px;
+    padding: 0px 10px;
+  }
 
   .chat-item {
     margin: 60px 4px;

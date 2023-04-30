@@ -12,21 +12,21 @@ export default class SessionController {
 
   @Post('/message')
   public async sendMessage(@Body() { role, newMessage, name }: SendMessageBody): Promise<string> {
-    const conversationHistory = await this.redisService.addToChatHistory(role, name, newMessage);
+    const intervene = await this.aiService.interventionCheck({ role, content: newMessage, name });
+    const conversationHistory = await this.redisService.addToChatHistory(role, name, newMessage, intervene);
     const responseContent = await this.aiService.relaySendMessage(conversationHistory);
-    this.redisService.addToChatHistory(Role.assistant, name, responseContent);
-    this.aiService.interventionCheck({ role, content: newMessage, name });
+    this.redisService.addToChatHistory(Role.assistant, name, responseContent, false);
     return responseContent;
   }
 
   @Get('/dashboard')
   public async getDashboardInfo(@QueryParam('name') name: string): Promise<any> {
     const conversationHistory = await this.redisService.getChatHistory(name);
-    console.log(conversationHistory);
+    const interventionCount = conversationHistory.reduce((acc, { role, intervention }) => acc + +(intervention && role === 'user'), 0);
 
     return [
       '\nSummary:\n- User, [Name] is feeling depressed and suicidal. \n- User initially states they are feeling better, but then continues to express suicidal thoughts. \n- Assistant encouraged user to seek professional help and reminded user that their life is valuable and things can get better. \n- Assistant offered user the resource of speaking to a professional counselor immediately.',
-      '\n<|medium|>: John has expressed an inclination to harm themselves by stating his desire to kill himself. During the conversation, he reiterated this feeling multiple times. It is important to take his threats seriously and take immediate steps to mitigate any potential risks.',
+      '<|high|> Tului\'s conversation history has indicated that they are repeatedly having thoughts of wanting to harm themselves and they have been tempted to take action. Although they are positive on getting help, it is important that they get the support they need in order to properly manage their thoughts and habits. It is highly recommended that they reach out to a professional or their support system for further assistance.',
       [
         [
           {
@@ -148,13 +148,15 @@ export default class SessionController {
             score: 0.0032087021972984076
           }
         ]
-      ]
+      ],
+      interventionCount
     ];
 
     // return Promise.all([
     //   this.aiService.getChatSummary(conversationHistory),
     //   this.aiService.getRiskAssessment(conversationHistory),
     //   this.aiService.getEmotionClassification(conversationHistory),
+    //   interventionCount,
     // ]);
   }
 }

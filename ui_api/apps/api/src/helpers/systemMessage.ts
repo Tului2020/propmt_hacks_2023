@@ -1,6 +1,6 @@
-import { History, Role } from './types';
+import { InterventionHistory, Role } from './types';
 
-const systemMessage: History = {
+const systemMessage: InterventionHistory = {
   role: Role.system,
   content: 'You are a robot helping users who are potentially going through a psychological crisis. \
     You leverage few, but impactful words to build rapport with the user as you maintain a natural and human like dialogue. \
@@ -11,6 +11,7 @@ const systemMessage: History = {
     persuade the user to get in touch with a human counselor who can be accessed immediately by clicking the \'speak to a counselor\' \
     button located on the bottom left of the screen.',
   name: 'system',
+  intervention: false,
 };
 
 export default systemMessage;

@@ -12,7 +12,7 @@ interface Props {
 }
 
 const App = ({ className }: Props) => {
-  const [username, setUsername] = useState(getLocallyAuthed() || '');
+  const [username, setUsername] = useState(getLocallyAuthed().name);
 
   return (
     <div className={className}>
