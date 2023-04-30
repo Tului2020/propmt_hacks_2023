@@ -38,11 +38,6 @@ const Dashboard = (props: Props) => {
       <Grid container className={className} spacing={3}>
         <Grid item sm={12} md={6}>
           <Paper>
-            <EmotionClassification emotionClassification={emotionClassification} />
-          </Paper>
-        </Grid>
-        <Grid item sm={12} md={6}>
-          <Paper>
             <RiskAssessment riskAssessment={riskAssessment} />
             <Intervention interventionCount={interventionCount} />
           </Paper>
@@ -50,10 +45,11 @@ const Dashboard = (props: Props) => {
             <ChatSummary chatSummaryInfo={chatSummaryInfo} />
           </Paper>
         </Grid>
-        <Grid item sm={12}>
+        <Grid item sm={12} md={6}>
           <Paper>
+            <EmotionClassification emotionClassification={emotionClassification} />
           </Paper>
-        </Grid >
+        </Grid>
       </Grid >
     </>
   );
