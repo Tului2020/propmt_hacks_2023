@@ -9,7 +9,7 @@ bootstrapMicroframework({
   ]
 })
   .then(() => console.log('API has started'))
-  .catch(e => {
+  .catch((e) => {
     console.log('<-------------------  error ------------------->');
     console.log(e);
     console.log('<-------------------  error ------------------->');
