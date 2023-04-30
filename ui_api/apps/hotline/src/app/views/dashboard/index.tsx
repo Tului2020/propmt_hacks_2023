@@ -42,10 +42,12 @@ const Dashboard = (props: Props) => {
           <Paper>
             <RiskAssessment riskAssessment={riskAssessment} />
           </Paper>
+          <Paper >
+            <ChatSummary chatSummaryInfo={chatSummaryInfo} />
+          </Paper>
         </Grid>
         <Grid item sm={12}>
           <Paper>
-            <ChatSummary chatSummaryInfo={chatSummaryInfo} />
           </Paper>
         </Grid >
       </Grid >
