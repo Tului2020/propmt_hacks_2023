@@ -11,11 +11,11 @@ const RiskAssessment = (props: Props) => {
 
   return (
     <div className={className}>
-      RiskAssessment
+      <h1>RiskAssessment</h1>
     </div>
   );
 };
 
 export default styled(RiskAssessment)`
-
+  padding: 30px;
 `;

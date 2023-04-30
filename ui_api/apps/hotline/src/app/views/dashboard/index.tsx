@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import Navigationbar from '../../navigationbar';
-import { Grid } from '@mui/material';
+import { Grid, Paper } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { getDashboardInfo } from '../../api_calls';
 import ChatSummary from './ChatSummary';
@@ -32,15 +32,21 @@ const Dashboard = (props: Props) => {
   return (
     <>
       <Navigationbar />
-      <Grid container className={className}>
+      <Grid container className={className} spacing={3}>
         <Grid item sm={6}>
-          <ChatSummary chatSummaryInfo={chatSummaryInfo} />
+          <Paper>
+            <ChatSummary chatSummaryInfo={chatSummaryInfo} />
+          </Paper>
         </Grid>
         <Grid item sm={6}>
-          <RiskAssessment riskAssessment={riskAssessment} />
+          <Paper>
+            <RiskAssessment riskAssessment={riskAssessment} />
+          </Paper>
         </Grid>
         <Grid item sm={12}>
-          <EmotionClassification emotionClassification={emotionClassification} />
+          <Paper>
+            <EmotionClassification emotionClassification={emotionClassification} />
+          </Paper>
         </Grid >
       </Grid >
     </>
@@ -49,9 +55,4 @@ const Dashboard = (props: Props) => {
 
 export default styled(Dashboard)`
   height: 100%;
-  border: 1px solid red;
-
-  div {
-    border: 1px solid blue;
-  }
 `;

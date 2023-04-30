@@ -11,11 +11,11 @@ const EmotionClassification = (props: Props) => {
 
   return (
     <div className={className}>
-      EmotionClassification
+      <h1>EmotionClassification</h1>
     </div>
   );
 };
 
 export default styled(EmotionClassification)`
-
+  padding: 30px;
 `;
