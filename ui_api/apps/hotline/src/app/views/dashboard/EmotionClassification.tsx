@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Chart from 'react-apexcharts';
+import type { ApexOptions } from 'apexcharts';
 
 interface Props {
   className?: string;
@@ -24,7 +25,7 @@ const EmotionClassification = (props: Props) => {
       return { ...acc };
     }, {});
 
-  const chartOptions: any = {
+  const chartOptions: ApexOptions = {
     chart: {
       height: 350,
       type: 'radar',
@@ -35,7 +36,7 @@ const EmotionClassification = (props: Props) => {
     yaxis: {
       tickAmount: 4,
       labels: {
-        formatter: (val: any) => val.toFixed(2)
+        formatter: (val: any) => val.toFixed(2),
       }
     }
   };
