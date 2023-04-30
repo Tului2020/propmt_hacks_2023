@@ -15,7 +15,7 @@ const Login = (props: Props) => {
   const { className, setUserInfo, username } = props;
   const [_username, _setUsername] = useState('');
   const [_phone, _setPhone] = useState<any>('');
-  const loginButtonDisabled = !(isValidPhoneNumber(_phone) && _username);
+  const loginButtonDisabled = !_username;
 
   const handleLogin = () => {
     if (!loginButtonDisabled) {

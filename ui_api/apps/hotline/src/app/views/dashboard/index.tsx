@@ -23,16 +23,18 @@ const Dashboard = (props: Props) => {
   const [riskAssessment, setRiskAssessment] = useState<RiskAssessmentResponse>('');
   const [emotionClassification, setEmotionClassification] = useState<EmotionClassificationResponse[]>([]);
   const [interventionCount, setInterventionCount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getDashboardInfo(userInfo.name)
       .then(([_cS, _rA, _eC, _iC]) => {
-        setChatSummaryInfo(_cS);
-        setRiskAssessment(_rA);
-        setEmotionClassification(_eC);
-        setInterventionCount(_iC);
+        setChatSummaryInfo(_cS || '');
+        setRiskAssessment(_rA || '');
+        setEmotionClassification(_eC || []);
+        setInterventionCount(_iC || 0);
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -44,18 +46,18 @@ const Dashboard = (props: Props) => {
             <UserProfile userInfo={userInfo} />
           </Paper>
           <Paper className='paper'>
-            <Intervention interventionCount={interventionCount} />
+            <Intervention interventionCount={interventionCount} loading={loading} />
           </Paper>
           <Paper className='paper'>
-            <RiskAssessment riskAssessment={riskAssessment} />
+            <RiskAssessment riskAssessment={riskAssessment} loading={loading} />
           </Paper>
           <Paper className='paper'>
-            <ChatSummary chatSummaryInfo={chatSummaryInfo} />
+            <ChatSummary chatSummaryInfo={chatSummaryInfo} loading={loading} />
           </Paper>
         </Grid>
         <Grid item sm={12} md={6}>
           <Paper className='paper'>
-            <EmotionClassification emotionClassification={emotionClassification} />
+            <EmotionClassification emotionClassification={emotionClassification} loading={loading} />
           </Paper>
         </Grid>
       </Grid >

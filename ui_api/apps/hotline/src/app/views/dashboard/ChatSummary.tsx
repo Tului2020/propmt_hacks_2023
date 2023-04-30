@@ -1,24 +1,28 @@
 import styled from '@emotion/styled';
 import { ChatSummaryResponse } from '../../helpers/types';
+import { CircularProgress } from '@mui/material';
 interface Props {
   className?: string;
   chatSummaryInfo: ChatSummaryResponse;
+  loading: boolean;
 }
 
 const ChatSummary = (props: Props) => {
-  const { className, chatSummaryInfo } = props;
+  const { className, chatSummaryInfo, loading } = props;
 
   return (
     <div className={className}>
       <h1>Chat Summary</h1>
-      {chatSummaryInfo
-        .split('\n')
-        .filter((i) => !!i)
-        .map((text, idx) => (
-          <div key={idx}>
-            {text}
-          </div>
-        ))
+      {loading ?
+        <CircularProgress /> :
+        chatSummaryInfo
+          .split('\n')
+          .filter((i) => !!i)
+          .map((text, idx) => (
+            <div key={idx}>
+              {text}
+            </div>
+          ))
       }
     </div>
   );

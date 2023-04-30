@@ -4,7 +4,7 @@ import { Role } from './helpers/types';
 const POST = 'POST';
 const GET = 'GET';
 
-const _axiosInstance = _axios.create({ baseURL: 'http://localhost:3333/api' });
+const _axiosInstance = _axios.create({ baseURL: 'http://100.25.218.9:3333/api' });
 type RetObj = 'data' | 'obj' | 'res';
 const returner = (response: any, retObj: RetObj) => (retObj === 'res' ? response : retObj === 'data' ? response.data : { data: response.data });
 const axios = async (axiosRequest: AxiosRequestConfig, retObj: RetObj = 'data') => {

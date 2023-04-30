@@ -1,14 +1,16 @@
 import styled from '@emotion/styled';
 import { RiskAssessmentResponse } from '../../helpers/types';
 import { useEffect, useState } from 'react';
+import { CircularProgress } from '@mui/material';
 
 interface Props {
   className?: string;
   riskAssessment: RiskAssessmentResponse;
+  loading: boolean;
 }
 
 const RiskAssessment = (props: Props) => {
-  const { className, riskAssessment } = props;
+  const { className, riskAssessment, loading } = props;
   const [level, setLevel] = useState<'red' | 'yellow' | 'none'>('none');
 
   useEffect(() => {
@@ -24,7 +26,7 @@ const RiskAssessment = (props: Props) => {
   return (
     <div className={className} style={{ border: `3px solid ${level}` }}>
       <h1>Risk Assessment</h1>
-      {riskAssessment}
+      {loading ? <CircularProgress /> : riskAssessment}
     </div>
   );
 };

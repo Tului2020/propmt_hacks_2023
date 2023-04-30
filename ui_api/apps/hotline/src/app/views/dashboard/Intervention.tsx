@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
-import { Alert, AlertColor } from '@mui/material';
+import { Alert, AlertColor, CircularProgress } from '@mui/material';
 
 interface Props {
   className?: string;
   interventionCount: number;
+  loading: boolean;
 }
 
 const countToSeverity = (interventionCount: number): AlertColor => {
@@ -14,11 +15,11 @@ const countToSeverity = (interventionCount: number): AlertColor => {
 };
 
 const Intervention = (props: Props) => {
-  const { interventionCount } = props;
+  const { interventionCount, loading } = props;
 
   return (
     <Alert severity={countToSeverity(interventionCount)}>
-      Intervention Level: {interventionCount}
+      {loading ? <CircularProgress /> : `Intervention Level: ${interventionCount}`}
     </Alert>
   );
 };
