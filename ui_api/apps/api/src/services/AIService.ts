@@ -17,6 +17,10 @@ const axios = async (axiosRequest: AxiosRequestConfig, retObj: RetObj = 'data') 
   }
 };
 
+const assessmentFilter = (conversationHistory: History[]) => conversationHistory
+  .filter(({ role }) => role !== 'system')
+  .map(({ role, content, name }) => ({ content, role: role === 'assistant' ? role : name }));
+
 
 @Service()
 export default class AIService {
@@ -29,11 +33,11 @@ export default class AIService {
   }
 
   public async getChatSummary(conversationHistory: History[]): Promise<string> {
-    return axios({ url: '/chat_summary', data: { history: conversationHistory.filter(({ role }) => role !== 'system') } });
+    return axios({ url: '/chat_summary', data: { history: assessmentFilter(conversationHistory) } });
   }
 
   public async getRiskAssessment(conversationHistory: History[]): Promise<string> {
-    return axios({ url: '/risk_assessment', data: { history: conversationHistory.filter(({ role }) => role !== 'system') } });
+    return axios({ url: '/risk_assessment', data: { history: assessmentFilter(conversationHistory) } });
   }
 
   public async getEmotionClassification(conversationHistory: History[]): Promise<string> {
