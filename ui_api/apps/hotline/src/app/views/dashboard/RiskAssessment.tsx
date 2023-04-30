@@ -7,11 +7,20 @@ interface Props {
 }
 
 const RiskAssessment = (props: Props) => {
-  const { className } = props;
+  const { className, riskAssessment } = props;
 
   return (
     <div className={className}>
-      <h1>RiskAssessment</h1>
+      <h1>Risk Assessment</h1>
+      {riskAssessment
+        .split('\n')
+        .filter((i) => !!i)
+        .map((text, idx) => (
+          <div key={idx}>
+            {text}
+          </div>
+        ))
+      }
     </div>
   );
 };
