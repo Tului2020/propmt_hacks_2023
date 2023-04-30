@@ -7,6 +7,7 @@ import ChatSummary from './ChatSummary';
 import RiskAssessment from './RiskAssessment';
 import EmotionClassification from './EmotionClassification';
 import { ChatSummaryResponse, EmotionClassificationResponse, RiskAssessmentResponse } from '../../helpers/types';
+import Intervention from './Intervention';
 
 interface Props {
   className?: string;
@@ -18,13 +19,15 @@ const Dashboard = (props: Props) => {
   const [chatSummaryInfo, setChatSummaryInfo] = useState<ChatSummaryResponse>('');
   const [riskAssessment, setRiskAssessment] = useState<RiskAssessmentResponse>('');
   const [emotionClassification, setEmotionClassification] = useState<EmotionClassificationResponse[]>([]);
+  const [interventionCount, setInterventionCount] = useState(0);
 
   useEffect(() => {
     getDashboardInfo(name)
-      .then(([_cS, _rA, _eC]) => {
+      .then(([_cS, _rA, _eC, _iC]) => {
         setChatSummaryInfo(_cS);
         setRiskAssessment(_rA);
         setEmotionClassification(_eC);
+        setInterventionCount(_iC);
       })
       .catch(console.error);
   }, []);
@@ -41,6 +44,7 @@ const Dashboard = (props: Props) => {
         <Grid item sm={12} md={6}>
           <Paper>
             <RiskAssessment riskAssessment={riskAssessment} />
+            <Intervention interventionCount={interventionCount} />
           </Paper>
           <Paper >
             <ChatSummary chatSummaryInfo={chatSummaryInfo} />
