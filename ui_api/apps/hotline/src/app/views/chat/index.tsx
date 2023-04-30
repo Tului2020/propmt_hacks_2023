@@ -5,6 +5,7 @@ import ChatHistory from './ChatHistory';
 import { useState } from 'react';
 import { History, Role } from '../../helpers/types';
 import { isBot } from '../../helpers/variables';
+import Navigationbar from '../../navigationbar';
 
 interface Props {
   className?: string;
@@ -26,24 +27,28 @@ const Chat = ({ className, username }: Props) => {
   };
 
   return (
-    <Grid container className={className}>
-      <Grid item sm={12}>
-        <ChatHistory
-          chatHistory={chatHistory}
-        />
+    <>
+      <Navigationbar />
+      <Grid container className={className}>
+        <Grid item sm={12}>
+          <ChatHistory
+            chatHistory={chatHistory}
+          />
+        </Grid>
+        <Grid item sm={12} style={{ height: 30 }} className='loader'>
+          {loading && <CircularProgress />}
+        </Grid>
+        <Grid item sm={12}>
+          <ChatBox
+            chatHistory={chatHistory}
+            addUserInput={(newMessage: string) => addToChatHistory('user', newMessage, username)}
+            addAssistantResponse={(newMessage: string) => addToChatHistory('assistant', newMessage, 'assistant')}
+            username={username}
+            loading={loading}
+          />
+        </Grid>
       </Grid>
-      <Grid item sm={12} style={{ height: 30 }} className='loader'>
-        {loading && <CircularProgress />}
-      </Grid>
-      <Grid item sm={12}>
-        <ChatBox
-          chatHistory={chatHistory}
-          addUserInput={(newMessage: string) => addToChatHistory('user', newMessage, username)}
-          addAssistantResponse={(newMessage: string) => addToChatHistory('assistant', newMessage, 'assistant')}
-          username={username}
-        />
-      </Grid>
-    </Grid>
+    </>
   );
 };
 

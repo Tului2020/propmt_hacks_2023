@@ -2,24 +2,33 @@ import { useState } from 'react';
 import { getLocallyAuthed } from './helpers/variables';
 import Login from './views/Login';
 import Chat from './views/chat';
-import './app.css'
+import './app.css';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Dashboard from './views/dashboard';
+import styled from '@emotion/styled';
 
-const App = () => {
+interface Props {
+  className?: string;
+}
+
+const App = ({ className }: Props) => {
   const [username, setUsername] = useState(getLocallyAuthed() || '');
 
   return (
-    <>
-      <div style={{ height: '95vh' }}>
-        <Chat
-          username={username}
-        />
-      </div>
+    <div className={className}>
+      <Routes>
+        <Route path='/chat' element={<Chat username={username} />} />
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='*' element={<Navigate to='/chat' />} />
+      </Routes>
       <Login
         username={username}
         setUsername={setUsername}
       />
-    </>
+    </div>
   );
-}
+};
 
-export default App;
+export default styled(App)`
+  height: 95vh;
+`;
