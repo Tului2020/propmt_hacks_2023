@@ -50,7 +50,7 @@ const EmotionClassification = (props: Props) => {
 
   return (
     <div className={className}>
-      <h1>Emotion Classification</h1>
+      <h1>Detected Emotions</h1>
       <Chart
         options={chartOptions}
         series={chartSeries}
