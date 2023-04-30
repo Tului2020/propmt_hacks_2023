@@ -1,18 +1,18 @@
 import styled from '@emotion/styled';
 import { Button, Dialog, DialogContent, DialogTitle, TextField, Grid } from '@mui/material';
 import { useState } from 'react';
-import { setLocallyAuthed } from '../helpers/variables';
+import { UserInfo, setLocallyAuthed } from '../helpers/variables';
 import 'react-phone-number-input/style.css';
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 
 interface Props {
   className?: string;
   username: string;
-  setUsername: React.Dispatch<React.SetStateAction<string>>;
+  setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>;
 }
 
 const Login = (props: Props) => {
-  const { className, setUsername, username } = props;
+  const { className, setUserInfo, username } = props;
   const [_username, _setUsername] = useState('');
   const [_phone, _setPhone] = useState<any>('');
   const loginButtonDisabled = !(isValidPhoneNumber(_phone) && _username);
@@ -45,7 +45,7 @@ const Login = (props: Props) => {
           <Grid item className='content'>
             <Button
               onClick={() => {
-                setUsername(_username);
+                setUserInfo({ name: _username, phone: _phone });
                 setLocallyAuthed(_username, _phone);
               }}
               disabled={loginButtonDisabled}

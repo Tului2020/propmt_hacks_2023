@@ -9,21 +9,23 @@ import EmotionClassification from './EmotionClassification';
 import { ChatSummaryResponse, EmotionClassificationResponse, RiskAssessmentResponse } from '../../helpers/types';
 import Intervention from './Intervention';
 import UserProfile from './UserProfile';
+import { UserInfo } from '../../helpers/variables';
 
 interface Props {
   className?: string;
-  name: string;
+  userInfo: UserInfo;
+  logoutUser: () => void;
 }
 
 const Dashboard = (props: Props) => {
-  const { className, name } = props;
+  const { className, userInfo, logoutUser } = props;
   const [chatSummaryInfo, setChatSummaryInfo] = useState<ChatSummaryResponse>('');
   const [riskAssessment, setRiskAssessment] = useState<RiskAssessmentResponse>('');
   const [emotionClassification, setEmotionClassification] = useState<EmotionClassificationResponse[]>([]);
   const [interventionCount, setInterventionCount] = useState(0);
 
   useEffect(() => {
-    getDashboardInfo(name)
+    getDashboardInfo(userInfo.name)
       .then(([_cS, _rA, _eC, _iC]) => {
         setChatSummaryInfo(_cS);
         setRiskAssessment(_rA);
@@ -35,11 +37,11 @@ const Dashboard = (props: Props) => {
 
   return (
     <>
-      <Navigationbar />
+      <Navigationbar userInfo={userInfo} logoutUser={logoutUser} />
       <Grid container className={className} spacing={3}>
         <Grid item sm={12} md={6} className='dashboard-left'>
           <Paper className='paper'>
-            <UserProfile />
+            <UserProfile userInfo={userInfo} />
           </Paper>
           <Paper className='paper'>
             <Intervention interventionCount={interventionCount} />

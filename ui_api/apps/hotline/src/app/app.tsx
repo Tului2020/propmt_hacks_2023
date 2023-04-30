@@ -12,18 +12,19 @@ interface Props {
 }
 
 const App = ({ className }: Props) => {
-  const [username, setUsername] = useState(getLocallyAuthed().name);
+  const [userInfo, setUserInfo] = useState(getLocallyAuthed());
+  const handleLogout = () => setUserInfo({ name: '', phone: '' });
 
   return (
     <div className={className}>
       <Routes>
-        <Route path='/chat' element={<Chat username={username} />} />
-        <Route path='/dashboard' element={<Dashboard name={username} />} />
+        <Route path='/chat' element={<Chat userInfo={userInfo} logoutUser={handleLogout} />} />
+        <Route path='/dashboard' element={<Dashboard userInfo={userInfo} logoutUser={handleLogout} />} />
         <Route path='*' element={<Navigate to='/chat' />} />
       </Routes>
       <Login
-        username={username}
-        setUsername={setUsername}
+        username={userInfo.name}
+        setUserInfo={setUserInfo}
       />
     </div>
   );

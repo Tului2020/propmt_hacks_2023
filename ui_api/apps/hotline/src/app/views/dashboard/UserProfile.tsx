@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
-import { getLocallyAuthed } from '../../helpers/variables';
+import { UserInfo } from '../../helpers/variables';
 
 interface Props {
   className?: string;
+  userInfo: UserInfo;
 }
 
 const UserProfile = (props: Props) => {
-  const { className } = props;
-  const userInfo = getLocallyAuthed();
+  const { className, userInfo } = props;
 
   return (
     <div className={className}>

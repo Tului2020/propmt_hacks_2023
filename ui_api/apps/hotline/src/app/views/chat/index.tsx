@@ -4,15 +4,16 @@ import ChatBox from './ChatBox';
 import ChatHistory from './ChatHistory';
 import { useState } from 'react';
 import { History, Role } from '../../helpers/types';
-import { isBot } from '../../helpers/variables';
+import { UserInfo, isBot } from '../../helpers/variables';
 import Navigationbar from '../../navigationbar';
 
 interface Props {
   className?: string;
-  username: string;
+  userInfo: UserInfo;
+  logoutUser: () => void;
 }
 
-const Chat = ({ className, username }: Props) => {
+const Chat = ({ className, userInfo, logoutUser }: Props) => {
   const [chatHistory, setChatHistory] = useState<History[]>([{ role: 'assistant', content: 'Hi, how can I help you today?', name: 'assistant' }]);
   const [loading, setLoading] = useState(false);
 
@@ -28,7 +29,7 @@ const Chat = ({ className, username }: Props) => {
 
   return (
     <>
-      <Navigationbar />
+      <Navigationbar userInfo={userInfo} logoutUser={logoutUser} />
       <Grid container className={className}>
         <Grid item sm={12} style={{ height: 400, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <ChatHistory
@@ -39,9 +40,9 @@ const Chat = ({ className, username }: Props) => {
         <Grid item sm={12} style={{ marginTop: '40px' }}>
           <ChatBox
             chatHistory={chatHistory}
-            addUserInput={(newMessage: string) => addToChatHistory('user', newMessage, username)}
+            addUserInput={(newMessage: string) => addToChatHistory('user', newMessage, userInfo.name)}
             addAssistantResponse={(newMessage: string) => addToChatHistory('assistant', newMessage, 'assistant')}
-            username={username}
+            username={userInfo.name}
             loading={loading}
           />
         </Grid>
