@@ -14,7 +14,7 @@ interface Props {
 
 const Chat = ({ className, username }: Props) => {
   const [chatHistory, setChatHistory] = useState<History[]>([{ role: 'assistant', content: 'Hi, how can I help you today?', name: 'assistant' }]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const addToChatHistory = (role: Role, newMessage: string, name: string) => {
     setLoading(!isBot(role));
@@ -30,15 +30,13 @@ const Chat = ({ className, username }: Props) => {
     <>
       <Navigationbar />
       <Grid container className={className}>
-        <Grid item sm={12}>
+        <Grid item sm={12} style={{ height: 400, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <ChatHistory
             chatHistory={chatHistory}
           />
-        </Grid>
-        <Grid item sm={12} style={{ height: 30 }} className='loader'>
           {loading && <CircularProgress />}
         </Grid>
-        <Grid item sm={12}>
+        <Grid item sm={12} style={{ marginTop: '40px' }}>
           <ChatBox
             chatHistory={chatHistory}
             addUserInput={(newMessage: string) => addToChatHistory('user', newMessage, username)}
@@ -53,7 +51,6 @@ const Chat = ({ className, username }: Props) => {
 };
 
 export default styled(Chat)`
-  height: 100%;
   display: flex;
 
   .loader {
