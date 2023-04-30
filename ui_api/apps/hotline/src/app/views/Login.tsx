@@ -17,6 +17,13 @@ const Login = (props: Props) => {
   const [_phone, _setPhone] = useState<any>('');
   const loginButtonDisabled = !(isValidPhoneNumber(_phone) && _username);
 
+  const handleLogin = () => {
+    if (!loginButtonDisabled) {
+      setUserInfo({ name: _username.replace(/ /g, '_'), phone: _phone });
+      setLocallyAuthed(_username.replace(/ /g, '_'), _phone);
+    }
+  };
+
   return (
     <Dialog
       className={className}
@@ -25,7 +32,11 @@ const Login = (props: Props) => {
       <DialogTitle>
         Please enter your name to continue
       </DialogTitle>
-      <DialogContent>
+      <DialogContent
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') handleLogin();
+        }}
+      >
         <Grid container>
           <Grid item className='content'>
             <TextField
@@ -44,10 +55,7 @@ const Login = (props: Props) => {
           </Grid>
           <Grid item className='content'>
             <Button
-              onClick={() => {
-                setUserInfo({ name: _username, phone: _phone });
-                setLocallyAuthed(_username, _phone);
-              }}
+              onClick={handleLogin}
               disabled={loginButtonDisabled}
             >
               Login
