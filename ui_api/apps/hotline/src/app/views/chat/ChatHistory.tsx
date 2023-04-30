@@ -35,6 +35,7 @@ export default styled(ChatHistory)`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: Helvetica;
 
   .inline {
     width: 700px;

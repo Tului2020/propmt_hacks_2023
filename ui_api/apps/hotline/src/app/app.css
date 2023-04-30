@@ -22,7 +22,7 @@ body {
   /* Give each entry a light yellowish tone */
 }
 
-textarea:focus { 
+textarea:focus {
   outline: none !important;
   border-color: rgb(167, 211, 146);
   box-shadow: 0 0 20px rgb(167, 211, 146);
