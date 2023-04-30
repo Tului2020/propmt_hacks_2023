@@ -40,13 +40,8 @@ const ChatBox = ({ className, addAssistantResponse, addUserInput, username, load
           }}
         />
       </Grid>
-      <Grid item className='chat-child'>
-        <Button
-          onClick={handleNewUserInput}
-          disabled={loading}
-        >
-          Send
-        </Button>
+      <Grid item className='chat-child' style={{ color: '#d0d0d0' }}>
+        Shift + Enter to Submit
       </Grid>
     </Grid>
   );
