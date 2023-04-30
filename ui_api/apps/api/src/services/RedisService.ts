@@ -1,7 +1,7 @@
 import { createClient } from 'redis';
 import { Service } from 'typedi';
 import env from '../env';
-import { History, Role } from '../helpers/types';
+import { History, InterventionHistory, Role } from '../helpers/types';
 import systemMessage from '../helpers/systemMessage';
 
 const redisClient = createClient(env.redis);
@@ -31,17 +31,18 @@ export default class RedisService {
     return JSON.parse(await this.get(key) || '[]');
   }
 
-  public async addToChatHistory(role: Role, name: string, newMessage: string): Promise<History[]> {
+  public async addToChatHistory(role: Role, name: string, newMessage: string, intervention: boolean): Promise<History[]> {
     const key = this.userKey(name);
 
-    let cachedHistory = JSON.parse(await this.get(key) || '[]') as History[];
-    cachedHistory.push({ role, content: newMessage, name });
+    let cachedHistory = JSON.parse(await this.get(key) || '[]') as InterventionHistory[];
+    cachedHistory.push({ role, content: newMessage, name, intervention });
     cachedHistory = cachedHistory.filter(({ role }) => role !== 'system');
 
     await this.set(key, JSON.stringify(cachedHistory));
 
     cachedHistory.unshift(systemMessage);
-    return cachedHistory;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    return cachedHistory.map(({ intervention, ...history }) => history);
   }
 
 }

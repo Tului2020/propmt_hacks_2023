@@ -12,10 +12,10 @@ export default class SessionController {
 
   @Post('/message')
   public async sendMessage(@Body() { role, newMessage, name }: SendMessageBody): Promise<string> {
-    const conversationHistory = await this.redisService.addToChatHistory(role, name, newMessage);
+    const intervene = await this.aiService.interventionCheck({ role, content: newMessage, name });
+    const conversationHistory = await this.redisService.addToChatHistory(role, name, newMessage, intervene);
     const responseContent = await this.aiService.relaySendMessage(conversationHistory);
-    this.redisService.addToChatHistory(Role.assistant, name, responseContent);
-    this.aiService.interventionCheck({ role, content: newMessage, name });
+    this.redisService.addToChatHistory(Role.assistant, name, responseContent, false);
     return responseContent;
   }
 

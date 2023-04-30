@@ -9,3 +9,7 @@ export enum Role {
   'system' = 'system',
   'user' = 'user',
 }
+
+export interface InterventionHistory extends History {
+  intervention: boolean;
+}
