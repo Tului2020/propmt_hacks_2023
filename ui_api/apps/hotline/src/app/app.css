@@ -1,18 +1,29 @@
 body {
-  background-color: rgb(58, 82, 68); /* Set background color to a yellowish tone */
+  background-color: rgb(58, 82, 68);
+  /* Set background color to a yellowish tone */
   /* background-image: url('path/to/ripped-paper-image.jpg'); Use an image of a ripped paper as background */
   background-size: cover;
   background-position: center;
 }
 
 .diary-container {
-  border: 2px solid #E8CDA7; /* Create a border around the container */
-  background-color: #F7E1C5; /* Give the container a slightly darker yellow tone */
+  border: 2px solid #E8CDA7;
+  /* Create a border around the container */
+  background-color: #F7E1C5;
+  /* Give the container a slightly darker yellow tone */
   padding: 20px;
 }
 
 .diary-entry {
   margin-bottom: 20px;
   padding: 10px;
-  background-color: #FFF8E8; /* Give each entry a light yellowish tone */
+  background-color: #d5d5d5;
+  border-radius: 20px;
+  /* Give each entry a light yellowish tone */
+}
+
+textarea:focus { 
+  outline: none !important;
+  border-color: rgb(167, 211, 146);
+  box-shadow: 0 0 20px rgb(167, 211, 146);
 }
