@@ -8,6 +8,7 @@ import RiskAssessment from './RiskAssessment';
 import EmotionClassification from './EmotionClassification';
 import { ChatSummaryResponse, EmotionClassificationResponse, RiskAssessmentResponse } from '../../helpers/types';
 import Intervention from './Intervention';
+import UserProfile from './UserProfile';
 
 interface Props {
   className?: string;
@@ -37,6 +38,9 @@ const Dashboard = (props: Props) => {
       <Navigationbar />
       <Grid container className={className} spacing={3}>
         <Grid item sm={12} md={6} className='dashboard-left'>
+          <Paper className='paper'>
+            <UserProfile />
+          </Paper>
           <Paper className='paper'>
             <Intervention interventionCount={interventionCount} />
           </Paper>
