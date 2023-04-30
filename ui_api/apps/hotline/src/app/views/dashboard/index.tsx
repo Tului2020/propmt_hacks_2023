@@ -35,7 +35,7 @@ const Dashboard = (props: Props) => {
       <Grid container className={className} spacing={3}>
         <Grid item sm={6}>
           <Paper>
-            <ChatSummary chatSummaryInfo={chatSummaryInfo} />
+            <EmotionClassification emotionClassification={emotionClassification} />
           </Paper>
         </Grid>
         <Grid item sm={6}>
@@ -45,7 +45,7 @@ const Dashboard = (props: Props) => {
         </Grid>
         <Grid item sm={12}>
           <Paper>
-            <EmotionClassification emotionClassification={emotionClassification} />
+            <ChatSummary chatSummaryInfo={chatSummaryInfo} />
           </Paper>
         </Grid >
       </Grid >

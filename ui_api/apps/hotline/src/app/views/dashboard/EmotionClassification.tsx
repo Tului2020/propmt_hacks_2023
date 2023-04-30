@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-// import { EmotionClassificationResponse } from '../../helpers/types';
+import Chart from 'react-apexcharts';
 
 interface Props {
   className?: string;
@@ -24,10 +24,38 @@ const EmotionClassification = (props: Props) => {
       return { ...acc };
     }, {});
 
+  const chartOptions: any = {
+    chart: {
+      height: 350,
+      type: 'radar',
+    },
+    xaxis: {
+      categories: Object.keys(spiderInfo)
+    },
+    yaxis: {
+      tickAmount: 4,
+      labels: {
+        formatter: (val: any) => val.toFixed(2)
+      }
+    }
+  };
+
+  const chartSeries: any = [
+    {
+      name: 'Session Metrics',
+      data: Object.values(spiderInfo),
+    },
+  ];
+
 
   return (
     <div className={className}>
       <h1>Emotion Classification</h1>
+      <Chart
+        options={chartOptions}
+        series={chartSeries}
+        type='radar'
+      />
     </div>
   );
 };
