@@ -14,7 +14,7 @@ interface Props {
 
 const Chat = ({ className, username }: Props) => {
   const [chatHistory, setChatHistory] = useState<History[]>([{ role: 'assistant', content: 'Hi, how can I help you today?', name: 'assistant' }]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const addToChatHistory = (role: Role, newMessage: string, name: string) => {
     setLoading(!isBot(role));
