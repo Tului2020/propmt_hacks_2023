@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
+import { EmotionClassificationResponse } from '../../helpers/types';
 
 interface Props {
   className?: string;
+  emotionClassification: EmotionClassificationResponse[];
 }
 
 const EmotionClassification = (props: Props) => {

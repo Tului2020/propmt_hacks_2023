@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
 import Navigationbar from '../../navigationbar';
 import { Grid } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getDashboardInfo } from '../../api_calls';
 import ChatSummary from './ChatSummary';
 import RiskAssessment from './RiskAssessment';
 import EmotionClassification from './EmotionClassification';
+import { ChatSummaryResponse, EmotionClassificationResponse, RiskAssessmentResponse } from '../../helpers/types';
 
 interface Props {
   className?: string;
@@ -14,10 +15,17 @@ interface Props {
 
 const Dashboard = (props: Props) => {
   const { className, name } = props;
+  const [chatSummaryInfo, setChatSummaryInfo] = useState<ChatSummaryResponse>('');
+  const [riskAssessment, setRiskAssessment] = useState<RiskAssessmentResponse>('');
+  const [emotionClassification, setEmotionClassification] = useState<EmotionClassificationResponse[]>([]);
 
   useEffect(() => {
     getDashboardInfo(name)
-      .then(console.log)
+      .then(([_cS, _rA, _eC]) => {
+        setChatSummaryInfo(_cS);
+        setRiskAssessment(_rA);
+        setEmotionClassification(_eC);
+      })
       .catch(console.error);
   });
 
@@ -26,13 +34,13 @@ const Dashboard = (props: Props) => {
       <Navigationbar />
       <Grid container className={className}>
         <Grid item sm={6}>
-          <ChatSummary />
+          <ChatSummary chatSummaryInfo={chatSummaryInfo} />
         </Grid>
         <Grid item sm={6}>
-          <RiskAssessment />
+          <RiskAssessment riskAssessment={riskAssessment} />
         </Grid>
         <Grid item sm={12}>
-          <EmotionClassification />
+          <EmotionClassification emotionClassification={emotionClassification} />
         </Grid >
       </Grid >
     </>
