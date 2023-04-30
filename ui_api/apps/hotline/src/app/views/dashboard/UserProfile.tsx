@@ -12,7 +12,7 @@ const UserProfile = (props: Props) => {
   return (
     <div className={className}>
       <h1>User Profile</h1>
-      <span>Name: {userInfo.name}</span>
+      <span>Name: {userInfo.name.replace(/_+/g, ' ')}</span>
       <span>Phone: {userInfo.phone}</span>
     </div>
   );

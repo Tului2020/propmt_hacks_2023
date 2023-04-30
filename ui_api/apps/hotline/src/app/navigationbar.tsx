@@ -52,7 +52,7 @@ const NavigationBar = (props: Props) => {
             {
               userInfo
                 .name
-                ?.split(' ')
+                ?.split('_')
                 .map((name) => name[0]?.toUpperCase())
                 .join('') || 'A'
             }
