@@ -19,7 +19,8 @@
         "styles": [],
         "scripts": [],
         "isolatedConfig": true,
-        "webpackConfig": "apps/hotline/webpack.config.js"
+        "webpackConfig": "apps/hotline/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {
