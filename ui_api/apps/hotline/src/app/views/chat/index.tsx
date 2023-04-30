@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { CircularProgress, Grid } from '@mui/material';
 import ChatBox from './ChatBox';
 import ChatHistory from './ChatHistory';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { History, Role } from '../../helpers/types';
 import { UserInfo, isBot } from '../../helpers/variables';
 import Navigationbar from '../../navigationbar';
@@ -14,8 +14,19 @@ interface Props {
 }
 
 const Chat = ({ className, userInfo, logoutUser }: Props) => {
-  const [chatHistory, setChatHistory] = useState<History[]>([{ role: 'assistant', content: 'Hi, how can I help you today?', name: 'assistant' }]);
+  const [chatHistory, setChatHistory] = useState<History[]>([]);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (userInfo.name) {
+      if (!chatHistory.length) {
+        setChatHistory([{ role: 'assistant', content: `Hi ${userInfo.name.split('_')[0]}, how can I help you today?`, name: 'assistant' }]);
+      }
+    } else {
+      setChatHistory([]);
+    }
+
+  }, [userInfo]);
 
   const addToChatHistory = (role: Role, newMessage: string, name: string) => {
     setLoading(!isBot(role));
