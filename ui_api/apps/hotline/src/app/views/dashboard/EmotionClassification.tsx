@@ -1,14 +1,16 @@
 import styled from '@emotion/styled';
 import Chart from 'react-apexcharts';
 import type { ApexOptions } from 'apexcharts';
+import { CircularProgress } from '@mui/material';
 
 interface Props {
   className?: string;
   emotionClassification: any;
+  loading: boolean;
 }
 
 const EmotionClassification = (props: Props) => {
-  const { className, emotionClassification } = props;
+  const { className, emotionClassification, loading } = props;
   const nData = emotionClassification.length;
 
   const spiderInfo = emotionClassification
@@ -52,12 +54,15 @@ const EmotionClassification = (props: Props) => {
   return (
     <div className={className}>
       <h1>Detected Emotions</h1>
-      <Chart
-        options={chartOptions}
-        series={chartSeries}
-        type='radar'
-        width={'100%'}
-      />
+      {loading ? <CircularProgress /> : nData ?
+        <Chart
+          options={chartOptions}
+          series={chartSeries}
+          type='radar'
+          width='100%'
+        /> :
+        <span style={{ fontSize: '30px' }}>No conversation history</span>
+      }
     </div>
   );
 };

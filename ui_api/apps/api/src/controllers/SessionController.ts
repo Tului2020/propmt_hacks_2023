@@ -23,12 +23,13 @@ export default class SessionController {
   public async getDashboardInfo(@QueryParam('name') name: string): Promise<any> {
     const conversationHistory = await this.redisService.getChatHistory(name);
     const interventionCount = conversationHistory.reduce((acc, { role, intervention }) => acc + +(intervention && role === 'user'), 0);
+    if (!conversationHistory.length) return [];
 
-     return Promise.all([
-       this.aiService.getChatSummary(conversationHistory),
-       this.aiService.getRiskAssessment(conversationHistory),
-       this.aiService.getEmotionClassification(conversationHistory),
-       interventionCount,
-     ]);
+    return Promise.all([
+      this.aiService.getChatSummary(conversationHistory),
+      this.aiService.getRiskAssessment(conversationHistory),
+      this.aiService.getEmotionClassification(conversationHistory),
+      interventionCount,
+    ]);
   }
 }
