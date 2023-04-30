@@ -15,7 +15,7 @@ RISK_ASSESSMENT_PROMPT = "You are an assistant to a crisis counselor, and you ju
 You are now tasked with assessing the risk level that the user is exhibiting to be harmful to themself or to others, \
 and report to the crisis counselor in charge. Generate a brief report for the crisis counselor while citing the conversation history \
 to support your claims. Begin your report with one of the following tokens that indicate the risk level: \
-<|high|>, <|medium|>, <|low|>. Refer the user by their name. \n\n"
+'<|high|>', '<|medium|>', '<|low|>'. Refer the user by their name. \n\n"
 
 INTERVENTION = "You are a robot tasked with classifying whether the user requires immediate human intervention. \
 The main criteria for this is if the user is displaying symptoms of suicidality, \
