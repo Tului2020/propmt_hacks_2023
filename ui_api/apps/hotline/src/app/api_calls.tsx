@@ -20,3 +20,4 @@ const axios = async (axiosRequest: AxiosRequestConfig, retObj: RetObj = 'data') 
 
 // session
 export const sendMessage = (role: Role, newMessage: string, name: string): Promise<string> => axios({ url: '/session/message', method: POST, data: { newMessage, role, name } });
+export const getDashboardInfo = (name: string) => axios({ url: '/session/dashboard', params: { name } });
