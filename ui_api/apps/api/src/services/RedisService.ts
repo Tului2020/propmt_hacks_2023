@@ -25,7 +25,7 @@ export default class RedisService {
     return `${name}`;
   }
 
-  public async getChatHistory(name: string): Promise<History[]> {
+  public async getChatHistory(name: string): Promise<InterventionHistory[]> {
     const key = this.userKey(name);
 
     return JSON.parse(await this.get(key) || '[]');

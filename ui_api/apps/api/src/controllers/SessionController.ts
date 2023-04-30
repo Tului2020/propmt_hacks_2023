@@ -22,7 +22,7 @@ export default class SessionController {
   @Get('/dashboard')
   public async getDashboardInfo(@QueryParam('name') name: string): Promise<any> {
     const conversationHistory = await this.redisService.getChatHistory(name);
-    console.log(conversationHistory);
+    const interventionCount = conversationHistory.reduce((acc, { role, intervention }) => acc + +(intervention && role === 'user'), 0);
 
     return [
       '\nSummary:\n- User, [Name] is feeling depressed and suicidal. \n- User initially states they are feeling better, but then continues to express suicidal thoughts. \n- Assistant encouraged user to seek professional help and reminded user that their life is valuable and things can get better. \n- Assistant offered user the resource of speaking to a professional counselor immediately.',
@@ -148,13 +148,15 @@ export default class SessionController {
             score: 0.0032087021972984076
           }
         ]
-      ]
+      ],
+      interventionCount
     ];
 
     // return Promise.all([
     //   this.aiService.getChatSummary(conversationHistory),
     //   this.aiService.getRiskAssessment(conversationHistory),
     //   this.aiService.getEmotionClassification(conversationHistory),
+    //   interventionCount,
     // ]);
   }
 }
