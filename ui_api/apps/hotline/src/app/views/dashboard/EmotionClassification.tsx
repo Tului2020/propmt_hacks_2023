@@ -62,5 +62,5 @@ const EmotionClassification = (props: Props) => {
 };
 
 export default styled(EmotionClassification)`
-  // padding: 30px;
+  padding: 20px;
 `;

@@ -36,17 +36,19 @@ const Dashboard = (props: Props) => {
     <>
       <Navigationbar />
       <Grid container className={className} spacing={3}>
-        <Grid item sm={12} md={6}>
-          <Paper>
-            <RiskAssessment riskAssessment={riskAssessment} />
+        <Grid item sm={12} md={6} className='dashboard-left'>
+          <Paper className='paper'>
             <Intervention interventionCount={interventionCount} />
           </Paper>
-          <Paper >
+          <Paper className='paper'>
+            <RiskAssessment riskAssessment={riskAssessment} />
+          </Paper>
+          <Paper className='paper'>
             <ChatSummary chatSummaryInfo={chatSummaryInfo} />
           </Paper>
         </Grid>
         <Grid item sm={12} md={6}>
-          <Paper>
+          <Paper className='paper'>
             <EmotionClassification emotionClassification={emotionClassification} />
           </Paper>
         </Grid>
@@ -57,4 +59,13 @@ const Dashboard = (props: Props) => {
 
 export default styled(Dashboard)`
   height: 100%;
+
+  .paper {
+    background-color: #dadada;
+    border-radius: 30px;
+  }
+  
+  .dashboard-left > * {
+    margin: 20px 0px;
+  }
 `;

@@ -25,5 +25,5 @@ const ChatSummary = (props: Props) => {
 };
 
 export default styled(ChatSummary)`
-  // padding: 30px;
+  padding: 20px;
 `;
