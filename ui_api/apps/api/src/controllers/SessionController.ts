@@ -14,6 +14,7 @@ export default class SessionController {
     const conversationHistory = await this.redisService.addToChatHistory(role, name, newMessage);
     const responseContent = await this.aiService.relaySendMessage(conversationHistory);
     this.redisService.addToChatHistory(Role.assistant, name, responseContent);
+    this.aiService.relayInterventionCheck({ role, content: newMessage, name });
     return responseContent;
   }
 }

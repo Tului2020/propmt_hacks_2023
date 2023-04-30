@@ -25,4 +25,8 @@ export default class AIService {
     return axios({ url: '/closet_ai', method: POST, data: { messages: conversationHistory } });
   }
 
+  public async relayInterventionCheck(message: History): Promise<void> {
+    console.log(await axios({ url: '/intervention_check', method: POST, data: { message } }));
+  }
+
 }
