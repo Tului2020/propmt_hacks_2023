@@ -55,6 +55,8 @@ const EmotionClassification = (props: Props) => {
         options={chartOptions}
         series={chartSeries}
         type='radar'
+        width={'100%'}
+        height={'100%'}
       />
     </div>
   );

@@ -33,12 +33,12 @@ const Dashboard = (props: Props) => {
     <>
       <Navigationbar />
       <Grid container className={className} spacing={3}>
-        <Grid item sm={6}>
+        <Grid item sm={12} md={6}>
           <Paper>
             <EmotionClassification emotionClassification={emotionClassification} />
           </Paper>
         </Grid>
-        <Grid item sm={6}>
+        <Grid item sm={12} md={6}>
           <Paper>
             <RiskAssessment riskAssessment={riskAssessment} />
           </Paper>
